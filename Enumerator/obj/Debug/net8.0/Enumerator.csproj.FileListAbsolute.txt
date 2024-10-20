@@ -1,0 +1,14 @@
+/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/bin/Debug/net8.0/Enumerator
+/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/bin/Debug/net8.0/Enumerator.deps.json
+/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/bin/Debug/net8.0/Enumerator.runtimeconfig.json
+/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/bin/Debug/net8.0/Enumerator.dll
+/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/bin/Debug/net8.0/Enumerator.pdb
+/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/obj/Debug/net8.0/Enumerator.GeneratedMSBuildEditorConfig.editorconfig
+/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/obj/Debug/net8.0/Enumerator.AssemblyInfoInputs.cache
+/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/obj/Debug/net8.0/Enumerator.AssemblyInfo.cs
+/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/obj/Debug/net8.0/Enumerator.csproj.CoreCompileInputs.cache
+/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/obj/Debug/net8.0/Enumerator.dll
+/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/obj/Debug/net8.0/refint/Enumerator.dll
+/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/obj/Debug/net8.0/Enumerator.pdb
+/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/obj/Debug/net8.0/Enumerator.genruntimeconfig.cache
+/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/obj/Debug/net8.0/ref/Enumerator.dll
