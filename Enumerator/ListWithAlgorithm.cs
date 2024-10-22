@@ -1,21 +1,29 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+
 namespace Enumerator;
 public class ListWithAlgorithm<T> : IEnumerable<T>
 {
     private Node<T> tail { get; set; } = null;
     private Node<T> head { get; set; } = null;
+
+    private GetElementByIndexDelegate<T> getElementByIndexDelegate;
     int count;
 
 
     public T _data;
 
 
-    public ListWithAlgorithm() { }
+    public ListWithAlgorithm()
+    {
+        getElementByIndexDelegate = GetElementByIndexDFS;
+    }
 
     public ListWithAlgorithm(T data)
     {
+        getElementByIndexDelegate = GetElementByIndexDFS;
         _data = data;
     }
 
@@ -114,6 +122,43 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
 
     public T GetElementByIndex(int index)
     {
+        return getElementByIndexDelegate.Invoke(index);
+    }
+
+    public T GetElementByIndexBFS(int index)
+    {
+        int i = 0;
+        var current = head;
+        Queue<Node<T>> previous = new();
+        while (current is not null)
+        {
+            if (i == index)
+            {
+                return current.data;
+            }
+            i += 1;
+            if (current.Container is not null && current.Container.head is not null)
+            {
+                previous.Enqueue(current.Container.head);
+            }
+            if (current.Next is not null)
+            {
+                current = current.Next;
+            }
+            else if (previous.Count != 0)
+            {
+                current = previous.Dequeue();
+            }
+            else
+            {
+                break;
+            }
+        }
+        throw new IndexOutOfRangeException("Index out of range");
+    }
+
+    public T GetElementByIndexDFS(int index)
+    {
         int i = 0;
         var current = head;
         Stack<Node<T>> previous = new();
@@ -206,6 +251,17 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
     {
         ConcreteAggregate<T> Aggregate = new ConcreteAggregate<T>(this);
         return ((IEnumerable)Aggregate).GetEnumerator();
+    }
+
+
+    public void UseBFS()
+    {
+        getElementByIndexDelegate = GetElementByIndexBFS;
+    }
+
+    public void UseDFS()
+    {
+        getElementByIndexDelegate = GetElementByIndexDFS;
     }
 }
 

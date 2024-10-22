@@ -146,4 +146,47 @@ public class Test
         Assert.Equal(list[1], list.GetElementByIndex(1));
         Assert.Throws<IndexOutOfRangeException>(() => list[3]);
     }
+
+    [Fact]
+    public void UseAlgTest()
+    {
+        ListWithAlgorithm<int> list = new ListWithAlgorithm<int>();
+
+        list.Add(1);
+        list.Add(2);
+        list.Add(3);
+        list.Add(4);
+        list.GetEmbeddedList(0).Add(5);
+        list.GetEmbeddedList(0).Add(6);
+        list.GetEmbeddedList(2).Add(7);
+        list.UseBFS();
+        Assert.Equal(3, list.GetElementByIndex(2));
+        Assert.Equal(6, list.GetElementByIndex(5));
+        list.UseDFS();
+        Assert.Equal(6, list.GetElementByIndex(2));
+        Assert.Equal(7, list.GetElementByIndex(5));
+    }
+
+    [Fact]
+    public void BFSTest()
+    {
+        ListWithAlgorithm<int> list = new ListWithAlgorithm<int>();
+        list.Add(1);
+        list.Add(2);
+        list.Add(3);
+        list.Add(4);
+        list.GetEmbeddedList(0).Add(5); 
+        list.GetEmbeddedList(0).Add(6);
+        list.GetEmbeddedList(0).GetEmbeddedList(0).Add(60);
+        list.GetEmbeddedList(2).Add(7);
+        list.UseBFS();
+        int[] ints = new int[8];
+        int i = 0;
+        foreach (var l in list)
+        {
+            ints[i] = l;
+            i += 1;
+        }
+        Assert.True(ints is [1, 2, 3, 4, 5, 6, 7, 60]);
+    }
 }

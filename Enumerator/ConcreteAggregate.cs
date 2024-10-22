@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Enumerator;
 
-class ConcreteAggregate<T> : IEnumerable<T> //DFS
+class ConcreteAggregate<T> : IEnumerable<T>
 {
 
     private ListWithAlgorithm<T> _Container;

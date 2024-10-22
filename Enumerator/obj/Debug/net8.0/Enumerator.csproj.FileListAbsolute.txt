@@ -12,3 +12,4 @@
 /Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/obj/Debug/net8.0/Enumerator.pdb
 /Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/obj/Debug/net8.0/Enumerator.genruntimeconfig.cache
 /Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/obj/Debug/net8.0/ref/Enumerator.dll
+/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/obj/Debug/net8.0/Enumerator.sourcelink.json
