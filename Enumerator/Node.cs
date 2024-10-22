@@ -5,7 +5,7 @@ public class Node<T>
 
     public Node(T data)
     {
-        Container = new ListWithAlgorithm<T>(data);
+        Container = new ListWithAlgorithm<T>();
         this.data = data;
     }
 
