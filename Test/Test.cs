@@ -86,7 +86,7 @@ public class Test
 
 
     [Fact]
-    public void GetElementByIndexTest()
+    public void GetElementByIndexDFSTest()
     {
         ListWithAlgorithm<int> list = new ListWithAlgorithm<int>();
         list.Add(1);
@@ -96,25 +96,27 @@ public class Test
         list.GetEmbeddedList(0).Add(5);
         list.GetEmbeddedList(0).Add(6);
         list.GetEmbeddedList(2).Add(7);
+        list.GetEmbeddedList(2).GetEmbeddedList(0).Add(70);
         Assert.Equal(1, list.GetElementByIndex(0));
         Assert.Equal(5, list.GetElementByIndex(1));
         Assert.Equal(6, list.GetElementByIndex(2));
         Assert.Equal(2, list.GetElementByIndex(3));
         Assert.Equal(3, list.GetElementByIndex(4));
         Assert.Equal(7, list.GetElementByIndex(5));
-        Assert.Equal(4, list.GetElementByIndex(6));
-        int[] ints = new int[7];
+        Assert.Equal(70, list.GetElementByIndex(6));
+        Assert.Equal(4, list.GetElementByIndex(7));
+        int[] ints = new int[8];
         int i = 0;
         foreach (var l in list)
         {
             ints[i] = l;
             i += 1;
         }
-        Assert.True(ints is [1,5,6,2,3,7,4]);
+        Assert.True(ints is [1,5,6,2,3,7,70,4]);
     }
 
     [Fact]
-    public void SetElementByIndexTest()
+    public void SetElementByIndexDFSTest()
     {
         ListWithAlgorithm<int> list = new ListWithAlgorithm<int>();
         list.Add(1);

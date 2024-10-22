@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Enumerator;
 public class ListWithAlgorithm<T> : IEnumerable<T>
@@ -10,6 +8,7 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
     private Node<T> head { get; set; } = null;
 
     private GetElementByIndexDelegate<T> getElementByIndexDelegate;
+    private SetElementByIndexDelegate<T> setElementByIndexDelegate;
     int count;
 
 
@@ -19,13 +18,9 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
     public ListWithAlgorithm()
     {
         getElementByIndexDelegate = GetElementByIndexDFS;
+        setElementByIndexDelegate = SetElementByIndexDFS;
     }
 
-    public ListWithAlgorithm(T data)
-    {
-        getElementByIndexDelegate = GetElementByIndexDFS;
-        _data = data;
-    }
 
     public void Add(T data)
     {
@@ -157,6 +152,8 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
         throw new IndexOutOfRangeException("Index out of range");
     }
 
+    
+
     public T GetElementByIndexDFS(int index)
     {
         int i = 0;
@@ -195,6 +192,11 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
 
     public bool SetElementByIndex(int index, T Data)
     {
+        return setElementByIndexDelegate.Invoke(index, Data);
+    }
+
+    public bool SetElementByIndexDFS(int index, T Data)
+    {
         int i = 0;
         var current = head;
         Stack<Node<T>> previous = new();
@@ -224,10 +226,84 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
             }
             else
             {
+                return false;
+            }
+        }
+        return false;
+    }
+
+
+    public bool SetElementByIndexBFS(int index, T Data)
+    {
+        int i = 0;
+        var current = head;
+        Queue<Node<T>> previous = new();
+        while (current is not null)
+        {
+            if (i == index)
+            {
+                current.data = Data;
+                return true;
+            }
+            i += 1;
+            if (current.Container is not null && current.Container.head is not null)
+            {
+                previous.Enqueue(current.Container.head);
+            }
+            if (current.Next is not null)
+            {
+                current = current.Next;
+            }
+            else if (previous.Count != 0)
+            {
+                current = previous.Dequeue();
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return false;
+    }
+
+
+    public int GetDeepByElement(T data)
+    {
+        int depth = 0;
+        Node<T> current = head;
+        Stack<(Node<T> node, int depth)> previous = new();
+        while (current is not null)
+        {
+            if (current.data.Equals(data))
+            {
+                return depth;
+            }
+
+            if (current.Container is not null && current.Container.head is not null)
+            {
+                if (current.Next is not null)
+                {
+                    previous.Push((current.Next, depth));
+                }
+                current = current.Container.head;
+                depth++;
+            }
+            else if (current.Next is not null)
+            {
+                current = current.Next;
+            }
+            else if (previous.Count > 0)
+            {
+                var previousNode = previous.Pop();
+                current = previousNode.node;
+                depth = previousNode.depth;
+            }
+            else
+            {
                 break;
             }
         }
-        throw new IndexOutOfRangeException("Index out of range");
+        return -1;
     }
 
     public T this[int index] {
@@ -239,6 +315,12 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
         {
             SetElementByIndex(index, value);
         }
+    }
+
+    public IEnumerable<(T value, int depth)> GetElementsWithDepth()
+    {
+        ConcreteAggregate<T> aggregate = new ConcreteAggregate<T>(this);
+        return aggregate.GetElementsWithDepth();
     }
 
     IEnumerator<T> IEnumerable<T>.GetEnumerator()
@@ -257,11 +339,54 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
     public void UseBFS()
     {
         getElementByIndexDelegate = GetElementByIndexBFS;
+        setElementByIndexDelegate = SetElementByIndexBFS;
     }
 
     public void UseDFS()
     {
         getElementByIndexDelegate = GetElementByIndexDFS;
+        setElementByIndexDelegate = SetElementByIndexDFS;
+    }
+
+    public int Deep
+    {
+        get
+        {
+            int max = 0;
+            var current = head;
+            Stack<Node<T>> previous = new();
+            int depth = 0;
+            while (current is not null)
+            {
+                if (current.Container is not null && current.Container.head is not null)
+                {
+                    if (current.Next is not null)
+                    {
+                        previous.Push(current.Next);
+                    }
+                    depth += 1;
+                    current = current.Container.head;
+                }
+                else if (current.Next is not null)
+                {
+                    current = current.Next;
+                }
+                else if (previous.Count != 0)
+                {
+                    depth -= 1;
+                    current = previous.Pop();
+                }
+                else
+                {
+                    break;
+                }
+                if (depth > max)
+                {
+                    max = depth;
+                }
+            }
+            return max;
+        }
     }
 }
 

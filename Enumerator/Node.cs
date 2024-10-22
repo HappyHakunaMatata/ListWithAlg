@@ -1,5 +1,4 @@
-﻿using System;
-using Enumerator;
+﻿using Enumerator;
 
 public class Node<T>
 {

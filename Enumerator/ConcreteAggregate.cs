@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using Enumerator;
 
 class ConcreteAggregate<T> : IEnumerable<T>
@@ -12,6 +10,8 @@ class ConcreteAggregate<T> : IEnumerable<T>
     {
         _Container = list;
     }
+
+
 
     IEnumerator<T> IEnumerable<T>.GetEnumerator()
     {
@@ -26,6 +26,15 @@ class ConcreteAggregate<T> : IEnumerable<T>
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
+    }
+
+    public IEnumerable<(T value, int depth)> GetElementsWithDepth()
+    {
+        var iterator = new ConcreteEnumerator<T>(_Container);
+        while (iterator.MoveNext())
+        {
+            yield return iterator.CurrentWithDeep();
+        }
     }
 
 }

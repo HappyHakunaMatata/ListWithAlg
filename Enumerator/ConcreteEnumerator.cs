@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using Enumerator;
 
 class ConcreteEnumerator<T> : IEnumerator<T>
@@ -51,4 +49,17 @@ class ConcreteEnumerator<T> : IEnumerator<T>
     }
 
     object IEnumerator.Current => (object)Current;
+
+    public int CurrentDeep
+    {
+        get
+        {
+            return _Container.GetDeepByElement(Current);
+        }
+    }
+
+    public (T value, int depth) CurrentWithDeep()
+    {
+        return (Current, CurrentDeep);
+    }
 }
