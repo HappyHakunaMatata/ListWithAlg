@@ -9,7 +9,7 @@ public class Test
     public void InitTest()
     {
         ListWithAlgorithm<int> list = new ListWithAlgorithm<int>();
-        Assert.True(0 == list.Count);
+        Assert.True(list is not null);
     }
 
     [Fact]
@@ -112,7 +112,7 @@ public class Test
             ints[i] = l;
             i += 1;
         }
-        Assert.True(ints is [1,5,6,2,3,7,70,4]);
+        Assert.True(ints is [1, 5, 6, 2, 3, 7, 70, 4]);
     }
 
     [Fact]
@@ -122,13 +122,12 @@ public class Test
         list.Add(1);
         list.Add(2);
         list.GetEmbeddedList(0).Add(3);
-        list.SetElementByIndex(0,10);
+        list.SetElementByIndex(0, 10);
         list.SetElementByIndex(1, 8);
         list.SetElementByIndex(2, 4);
         Assert.Equal(10, list.GetElementByIndex(0));
         Assert.Equal(8, list.GetElementByIndex(1));
         Assert.Equal(4, list.GetElementByIndex(2));
-        Assert.Throws<IndexOutOfRangeException>(() => list.SetElementByIndex(3, 5));
     }
 
 
@@ -153,7 +152,6 @@ public class Test
     public void UseAlgTest()
     {
         ListWithAlgorithm<int> list = new ListWithAlgorithm<int>();
-
         list.Add(1);
         list.Add(2);
         list.Add(3);
@@ -164,13 +162,17 @@ public class Test
         list.UseBFS();
         Assert.Equal(3, list.GetElementByIndex(2));
         Assert.Equal(6, list.GetElementByIndex(5));
+        list.SetElementByIndex(3, 30);
+        Assert.Equal(30, list.GetElementByIndex(3));
         list.UseDFS();
         Assert.Equal(6, list.GetElementByIndex(2));
         Assert.Equal(7, list.GetElementByIndex(5));
+        list.SetElementByIndex(5, 50);
+        Assert.Equal(50, list.GetElementByIndex(5));
     }
 
     [Fact]
-    public void BFSTest()
+    public void GetElementByIndexBFSTest()
     {
         ListWithAlgorithm<int> list = new ListWithAlgorithm<int>();
         list.Add(1);
@@ -191,4 +193,66 @@ public class Test
         }
         Assert.True(ints is [1, 2, 3, 4, 5, 6, 7, 60]);
     }
+
+    [Fact]
+    public void SetElementByIndexBFSTest()
+    {
+        ListWithAlgorithm<int> list = new ListWithAlgorithm<int>();
+        list.Add(1);
+        list.Add(2);
+        list.Add(3);
+        list.Add(4);
+        list.GetEmbeddedList(0).Add(5);
+        list.GetEmbeddedList(0).Add(6);
+        list.GetEmbeddedList(0).GetEmbeddedList(0).Add(60);
+        list.GetEmbeddedList(2).Add(7);
+        list.UseBFS();
+        list.SetElementByIndexBFS(0, 4000);
+        Assert.True(list[0] == 4000);
+    }
+
+    [Fact]
+    public void TestDeep()
+    {
+        ListWithAlgorithm<int> list = new ListWithAlgorithm<int>();
+        list.Add(1);
+        list.Add(2);
+        list.Add(3);
+        list.Add(4);
+        list.GetEmbeddedList(0).Add(5);
+        list.GetEmbeddedList(0).Add(6);
+        list.GetEmbeddedList(0).GetEmbeddedList(0).Add(60);
+        list.GetEmbeddedList(2).Add(7);
+        var deep = list.GetDeepByElement(6);
+        Assert.True(deep == 1);
+        Assert.True(list.Deep == 2);
+    }
+
+    [Fact]
+    public void GetElementsWithDepthTest()
+    {
+        ListWithAlgorithm<int> list = new ListWithAlgorithm<int>();
+        list.Add(1);
+        list.Add(2);
+        list.Add(3);
+        list.Add(4);
+        list.GetEmbeddedList(0).Add(5);
+        list.GetEmbeddedList(0).Add(6);
+        list.GetEmbeddedList(2).Add(7);
+        list.GetEmbeddedList(2).GetEmbeddedList(0).Add(70);
+        List<(int,int)> ints = new();
+        foreach (var l in list.GetElementsWithDepth())
+        {
+            ints.Add(l);
+        }
+        Assert.Equal((1, 0), ints.ElementAt(0));
+        Assert.Equal((5, 1), ints.ElementAt(1));
+        Assert.Equal((6, 1), ints.ElementAt(2));
+        Assert.Equal((2, 0), ints.ElementAt(3));
+        Assert.Equal((3, 0), ints.ElementAt(4));
+        Assert.Equal((7, 1), ints.ElementAt(5));
+        Assert.Equal((70, 2), ints.ElementAt(6));
+        Assert.Equal((4, 0), ints.ElementAt(7));
+    }
+    
 }

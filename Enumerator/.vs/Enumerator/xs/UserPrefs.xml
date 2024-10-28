@@ -1,33 +1,33 @@
 ﻿<Properties StartupConfiguration="{A3316A48-4018-4E73-B03B-FD5BE937A70C}|Default">
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Test FirstBuild="True" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+  <MonoDevelop.Ide.ItemProperties.Test PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.Enumerator PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ListWithAlgorithm.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Node.cs">
     <Files>
-      <File FileName="Program.cs" Line="24" Column="10" />
-      <File FileName="ConcreteEnumerator.cs" Line="146" Column="1" />
-      <File FileName="Item.cs" Line="27" Column="26" />
-      <File FileName="Enumerator.cs" Line="3" Column="28" />
-      <File FileName="ConcreteEnumerator.cs" Line="39" Column="63" />
-      <File FileName="Aggregate.cs" Line="1" Column="1" />
-      <File FileName="ConcreteAggregate.cs" Line="22" Column="1" />
-      <File FileName="DFS.cs" Line="35" Column="3" />
-      <File FileName="Algorithm.cs" Line="1" Column="1" />
-      <File FileName="BFS.cs" Line="42" Column="3" />
-      <File FileName="Enumerator.csproj" Line="6" Column="44" />
-      <File FileName="../../../Documents/base58/base58/base58.csproj" Line="6" Column="44" />
+      <File FileName="Program.cs" Line="9" Column="66" />
+      <File FileName="ListWithAlgorithm.cs" Line="157" Column="34" />
+      <File FileName="ConcreteAggregate.cs" Line="1" Column="1" />
+      <File FileName="ConcreteEnumerator.cs" Line="26" Column="29" />
+      <File FileName="Node.cs" Line="22" Column="10" />
+      <File FileName="../Test/Test.cs" Line="153" Column="27" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Enumerator" expanded="True">
-            <Node name="Enumerator" expanded="True">
-              <Node name="ListWithAlgorithm.cs" selected="True" />
+            <Node name="Enumerator">
+              <Node name="Node.cs" selected="True" />
             </Node>
+            <Node name="Test" expanded="True" />
           </Node>
         </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__" />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

@@ -1,32 +1,47 @@
-﻿using Enumerator;
+﻿using System.Reflection;
+using Enumerator;
 
-public class Node<T>
+public class Node<T>: IDisposable
 {
 
     public Node(T data)
     {
         Container = new ListWithAlgorithm<T>();
         this.data = data;
+
+        if (data is IDisposable disposable)
+        {
+            baseDisposeMethod = disposable;
+        }
     }
 
     public ListWithAlgorithm<T> Container { get; set; }
     public T data { get; set; }
     public Node<T> Next { get; set; }
-    
+    private IDisposable baseDisposeMethod = null;
 
-    public void Add(T data)
+
+
+
+    private bool disposed = false;
+    protected virtual void Dispose(bool disposing)
     {
-        if (Container is not null)
+        if (disposed)
         {
-            Container.Add(data);
+            return;
         }
+        if (disposing)
+        {
+            baseDisposeMethod?.Dispose();
+            Container?.Dispose();
+        }
+
+        disposed = true;
     }
 
-    public void Remove(T data)
+    public void Dispose()
     {
-        if (Container is not null)
-        {
-            Container.Remove(data);
-        }
+        Dispose(true);
+        GC.SuppressFinalize(this);
     }
 }

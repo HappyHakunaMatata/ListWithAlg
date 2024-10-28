@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace Enumerator;
 public class ListWithAlgorithm<T> : IEnumerable<T>
@@ -10,9 +10,6 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
     private GetElementByIndexDelegate<T> getElementByIndexDelegate;
     private SetElementByIndexDelegate<T> setElementByIndexDelegate;
     int count;
-
-
-    public T _data;
 
 
     public ListWithAlgorithm()
@@ -37,6 +34,7 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
         count++;
     }
 
+
     public ListWithAlgorithm<T> GetEmbeddedList(int index)
     {
         if (index < 0 || head is null)
@@ -58,6 +56,7 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
         
         return current.Container;
     }
+
 
     public bool Remove(T data)
     {
@@ -92,6 +91,7 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
         return false;
     }
 
+
     public int Count
     {
         get
@@ -107,6 +107,7 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
         }
     }
 
+
     public bool IsEmpty
     {
         get
@@ -115,10 +116,12 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
         }
     }
 
+
     public T GetElementByIndex(int index)
     {
         return getElementByIndexDelegate.Invoke(index);
     }
+
 
     public T GetElementByIndexBFS(int index)
     {
@@ -153,7 +156,6 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
     }
 
     
-
     public T GetElementByIndexDFS(int index)
     {
         int i = 0;
@@ -190,10 +192,12 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
         throw new IndexOutOfRangeException("Index out of range");
     }
 
+
     public bool SetElementByIndex(int index, T Data)
     {
         return setElementByIndexDelegate.Invoke(index, Data);
     }
+
 
     public bool SetElementByIndexDFS(int index, T Data)
     {
@@ -232,7 +236,7 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
         return false;
     }
 
-
+    
     public bool SetElementByIndexBFS(int index, T Data)
     {
         int i = 0;
@@ -306,6 +310,7 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
         return -1;
     }
 
+
     public T this[int index] {
         get
         {
@@ -316,6 +321,7 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
             SetElementByIndex(index, value);
         }
     }
+    
 
     public IEnumerable<(T value, int depth)> GetElementsWithDepth()
     {
@@ -323,11 +329,13 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
         return aggregate.GetElementsWithDepth();
     }
 
+
     IEnumerator<T> IEnumerable<T>.GetEnumerator()
     {
         ConcreteAggregate<T> Aggregate = new ConcreteAggregate<T>(this);
         return ((IEnumerable<T>)Aggregate).GetEnumerator();
     }
+
 
     IEnumerator IEnumerable.GetEnumerator()
     {
@@ -335,18 +343,20 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
         return ((IEnumerable)Aggregate).GetEnumerator();
     }
 
-
+    
     public void UseBFS()
     {
         getElementByIndexDelegate = GetElementByIndexBFS;
         setElementByIndexDelegate = SetElementByIndexBFS;
     }
 
+
     public void UseDFS()
     {
         getElementByIndexDelegate = GetElementByIndexDFS;
         setElementByIndexDelegate = SetElementByIndexDFS;
     }
+
 
     public int Deep
     {
@@ -387,6 +397,28 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
             }
             return max;
         }
+    }
+
+    private bool disposed = false;
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposed)
+        {
+            return;
+        }
+        if (disposing)
+        {
+            tail.Dispose();
+            head.Dispose();
+        }
+
+        disposed = true;
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
     }
 }
 

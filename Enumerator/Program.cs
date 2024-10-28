@@ -14,10 +14,6 @@ public static class Program
         list.GetEmbeddedList(1).Add(5);
         list.GetEmbeddedList(1).Add(6);
         list.GetEmbeddedList(2).Add(7);
-        /*foreach (var i in list)
-        {
-            Console.WriteLine(i);
-        }*/
         foreach (var i in list.GetElementsWithDepth())
         {
             Console.WriteLine($"value: {i.value} depth: {i.depth}");
