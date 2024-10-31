@@ -33,7 +33,10 @@ public class Node<T>: IDisposable
         if (disposing)
         {
             baseDisposeMethod?.Dispose();
-            Container?.Dispose();
+            if (Container is not null && !Container.IsEmpty)
+            {
+                Container?.Dispose();
+            }
         }
 
         disposed = true;

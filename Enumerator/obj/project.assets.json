@@ -8,24 +8,27 @@
     "net8.0": []
   },
   "packageFolders": {
-    "/Users/user/.nuget/packages/": {}
+    "C:\\Users\\HP1\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/Enumerator.csproj",
+      "projectUniqueName": "C:\\Users\\HP1\\source\\repos\\GraphIterator-Enumerator--main\\Enumerator\\Enumerator.csproj",
       "projectName": "Enumerator",
-      "projectPath": "/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/Enumerator.csproj",
-      "packagesPath": "/Users/user/.nuget/packages/",
-      "outputPath": "/Users/user/Downloads/GraphIterator-Enumerator--main/Enumerator/obj/",
+      "projectPath": "C:\\Users\\HP1\\source\\repos\\GraphIterator-Enumerator--main\\Enumerator\\Enumerator.csproj",
+      "packagesPath": "C:\\Users\\HP1\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HP1\\source\\repos\\GraphIterator-Enumerator--main\\Enumerator\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/user/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\HP1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -38,6 +41,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -59,7 +67,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

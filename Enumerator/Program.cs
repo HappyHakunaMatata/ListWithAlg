@@ -18,6 +18,6 @@ public static class Program
         {
             Console.WriteLine($"value: {i.value} depth: {i.depth}");
         }
-
+       
     }
 }

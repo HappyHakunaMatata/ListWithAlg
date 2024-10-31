@@ -2,25 +2,15 @@
 using System.Reflection;
 using Enumerator;
 
-class ConcreteEnumerator<T> : IEnumerator<T>
+class ConcreteEnumerator<T> : IEnumerator<T>, IDisposable
 {
     public ListWithAlgorithm<T> _Container;
-    int position = -1;
-    private MethodInfo baseDiposeMethod = null;
+    private int position = -1;
+    
 
     public ConcreteEnumerator(ListWithAlgorithm<T> list)
     {
         _Container = list;
-    }
-
-    private ConcreteEnumerator()
-    {
-        var type = typeof(T);
-        var interfaces = type.GetInterfaces();
-        if (interfaces.Contains(typeof(IDisposable)))
-        {
-            baseDiposeMethod = type.GetMethod(nameof(Dispose), BindingFlags.Public);
-        }
     }
 
     private bool disposed = false;
@@ -32,10 +22,7 @@ class ConcreteEnumerator<T> : IEnumerator<T>
         }
         if (disposing)
         {
-            if (baseDiposeMethod is not null)
-            {
-                baseDiposeMethod.Invoke(_Container., null);
-            }
+            _Container.Dispose();
         }
 
         disposed = true;

@@ -2,14 +2,13 @@
 
 
 namespace Enumerator;
-public class ListWithAlgorithm<T> : IEnumerable<T>
+public class ListWithAlgorithm<T> : IEnumerable<T>, IDisposable
 {
     private Node<T> tail { get; set; } = null;
     private Node<T> head { get; set; } = null;
-
     private GetElementByIndexDelegate<T> getElementByIndexDelegate;
     private SetElementByIndexDelegate<T> setElementByIndexDelegate;
-    int count;
+    private int count;
 
 
     public ListWithAlgorithm()
@@ -321,29 +320,33 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
             SetElementByIndex(index, value);
         }
     }
-    
-
-    public IEnumerable<(T value, int depth)> GetElementsWithDepth()
-    {
-        ConcreteAggregate<T> aggregate = new ConcreteAggregate<T>(this);
-        return aggregate.GetElementsWithDepth();
-    }
 
 
     IEnumerator<T> IEnumerable<T>.GetEnumerator()
     {
-        ConcreteAggregate<T> Aggregate = new ConcreteAggregate<T>(this);
-        return ((IEnumerable<T>)Aggregate).GetEnumerator();
+        return GetEnumerator();
     }
 
+    ConcreteEnumerator<T> GetEnumerator()
+    {
+        return new ConcreteEnumerator<T>(this);
+    }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        ConcreteAggregate<T> Aggregate = new ConcreteAggregate<T>(this);
-        return ((IEnumerable)Aggregate).GetEnumerator();
+        return GetEnumerator();
     }
 
-    
+    public IEnumerable<(T value, int depth)> GetElementsWithDepth()
+    {
+        var iterator = new ConcreteEnumerator<T>(this);
+        while (iterator.MoveNext())
+        {
+            yield return iterator.CurrentWithDeep();
+        }
+    }
+
+
     public void UseBFS()
     {
         getElementByIndexDelegate = GetElementByIndexBFS;

@@ -1,0 +1,6 @@
+﻿.vs/
+.bin/
+.obj/
+.DS_Store
+/Test/obj
+/Test/bin
