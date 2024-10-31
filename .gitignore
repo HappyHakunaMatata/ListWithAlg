@@ -4,4 +4,5 @@
 .DS_Store
 /Test/obj
 /Test/bin
-.DS_Store
+/Enumerator/obj
+/Enumerator/bin
