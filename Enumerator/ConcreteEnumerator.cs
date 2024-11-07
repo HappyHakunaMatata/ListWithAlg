@@ -2,7 +2,7 @@
 using System.Reflection;
 using Enumerator;
 
-class ConcreteEnumerator<T> : IEnumerator<T>, IDisposable
+internal class ConcreteEnumerator<T> : IEnumerator<T>
 {
     public ListWithAlgorithm<T> _Container;
     private int position = -1;
@@ -13,26 +13,9 @@ class ConcreteEnumerator<T> : IEnumerator<T>, IDisposable
         _Container = list;
     }
 
-    private bool disposed = false;
-    private void Dispose(bool disposing)
-    {
-        if (disposed)
-        {
-            return;
-        }
-        if (disposing)
-        {
-            _Container.Dispose();
-        }
+   
 
-        disposed = true;
-    }
-
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
+    public void Dispose() { }
 
     public bool MoveNext()
     {

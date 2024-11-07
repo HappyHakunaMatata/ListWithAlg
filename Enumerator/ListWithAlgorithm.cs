@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-
-
 namespace Enumerator;
-public class ListWithAlgorithm<T> : IEnumerable<T>, IDisposable
+
+
+public class ListWithAlgorithm<T> : IEnumerable<T>
 {
     private Node<T> tail { get; set; } = null;
     private Node<T> head { get; set; } = null;
@@ -402,26 +402,5 @@ public class ListWithAlgorithm<T> : IEnumerable<T>, IDisposable
         }
     }
 
-    private bool disposed = false;
-    protected virtual void Dispose(bool disposing)
-    {
-        if (disposed)
-        {
-            return;
-        }
-        if (disposing)
-        {
-            tail.Dispose();
-            head.Dispose();
-        }
-
-        disposed = true;
-    }
-
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
 }
 
