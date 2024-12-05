@@ -197,6 +197,69 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
         return setElementByIndexDelegate.Invoke(index, Data);
     }
 
+    public T GetElementDFS(T value)
+    {
+        var current = head;
+        Stack<Node<T>> previous = new();
+        while (current is not null)
+        {
+            if (value.Equals(current.data))
+            {
+                return current.data;
+            }
+            if (current.Container is not null && current.Container.head is not null)
+            {
+                if (current.Next is not null)
+                {
+                    previous.Push(current.Next);
+                }
+                current = current.Container.head;
+            }
+            else if (current.Next is not null)
+            {
+                current = current.Next;
+            }
+            else if (previous.Count != 0)
+            {
+                current = previous.Pop();
+            }
+            else
+            {
+                break;
+            }
+        }
+        throw new IndexOutOfRangeException("Index out of range");
+    }
+
+    public T GetElementByIndexBFS(T vaue)
+    {
+        var current = head;
+        Queue<Node<T>> previous = new();
+        while (current is not null)
+        {
+            if (vaue.Equals(current.data))
+            {
+                return current.data;
+            }
+            if (current.Container is not null && current.Container.head is not null)
+            {
+                previous.Enqueue(current.Container.head);
+            }
+            if (current.Next is not null)
+            {
+                current = current.Next;
+            }
+            else if (previous.Count != 0)
+            {
+                current = previous.Dequeue();
+            }
+            else
+            {
+                break;
+            }
+        }
+        throw new IndexOutOfRangeException("Index out of range");
+    }
 
     public bool SetElementByIndexDFS(int index, T Data)
     {
@@ -268,6 +331,7 @@ public class ListWithAlgorithm<T> : IEnumerable<T>
         }
         return false;
     }
+
 
 
     public int GetDeepByElement(T data)

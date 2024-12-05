@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Enumerator;
 
-internal sealed class Node<T>
+public sealed class Node<T>
 {
 
     public Node(T data)
